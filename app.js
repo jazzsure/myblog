@@ -39,13 +39,15 @@ const serverHandle = (req, res)=>{
     getPostData(req).then(postData=>{
         req.body = postData;
         //处理blog路由
-        const blogData = handleBlogRouter(req, res);
-        //console.log('bldata', blogData)
-        if(blogData){
-            //console.log('xx222')
-            res.end(
-                JSON.stringify(blogData)
-            );
+        const blogResult = handleBlogRouter(req,res);
+        if(blogResult){
+            blogResult.then(blogData=>{
+                if(blogData){
+                    res.end(
+                        JSON.stringify(blogData)
+                    );
+                }
+            });
             return;
         }
 

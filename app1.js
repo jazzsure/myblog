@@ -43,15 +43,16 @@ const server = http.createServer((req, res)=>{
             JSON.stringify(resData)
         );
     }
-    console.log(method)
+    
     if(method === 'POST'){
+
         let postData = '';
         req.on('data', chunk =>{
             postData += chunk;
-            console.log(123)
+
         });
         req.on('end', ()=>{
-            console.log(1)
+
             resData.postData = postData;
             res.end(
                 JSON.stringify(resData)
