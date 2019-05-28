@@ -52,11 +52,13 @@ const serverHandle = (req, res)=>{
         }
 
         //处理user 路由
-        const userData = handleUserRouter(req, res);
-        if(userData){
-            res.end(
-                JSON.stringify(userData)
-            );
+        const userDataResult = handleUserRouter(req, res);
+        if(userDataResult){
+            userDataResult.then(userData =>{
+                res.end(
+                    JSON.stringify(userData)
+                );
+            });
             return;
         }
         //未命中路由，返回404
